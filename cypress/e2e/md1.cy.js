@@ -1,23 +1,23 @@
-import selectablePage from '../pages/selectablePage';
+import grid from '../pages/GridPage'
 
-describe('Selectable Grid Test', () => {
+describe('grid selection check', () => {
+  it('selects some items and ignores the rest', () => {
 
-  it('should select correct grid items', () => {
-
-    selectablePage.visit();       
-    selectablePage.clickGrid();  
-
-    const selected = ['Two', 'Four', 'Six', 'Eight'];
-    const notSelected = ['One', 'Three', 'Five', 'Seven', 'Nine'];
-
-    
-    selected.forEach(item => selectablePage.clickItem(item));
-
-    selected.forEach(item => selectablePage.validateSelected(item));
-
-    
-    notSelected.forEach(item => selectablePage.validateNotSelected(item));
-
-  });
-
-});
+    grid.open()
+    grid.switchToGrid()
+    grid.pick('Two')
+    grid.pick('Four')
+    grid.pick('Six')
+    grid.pick('Eight')
+    grid.isActive('Two')
+    grid.isActive('Four')
+    grid.isActive('Six')
+    grid.isActive('Eight')
+// pārējie nedrīkst būt izvēlēti
+    grid.isNotActive('One')
+    grid.isNotActive('Three')
+    grid.isNotActive('Five')
+    grid.isNotActive('Seven')
+    grid.isNotActive('Nine')
+  })
+})
